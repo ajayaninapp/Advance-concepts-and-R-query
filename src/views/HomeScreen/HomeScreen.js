@@ -26,7 +26,7 @@ const HomePage = () => {
       </AppBar>
       <SideDrawer/>
 
-      <Box component="main" sx={{ flexGrow: 1, background:"#f0eeeb",minHeight:"100vh" }}>
+      <Box component="main" sx={{ flexGrow: 1, background:"#f0eeeb",minHeight:"100vh" ,maxWidth:"calc(100vw-240px)",overflowX:"hidden"}}>
         <Toolbar />
         <TableContextDataHandler>
         <InfoTable />

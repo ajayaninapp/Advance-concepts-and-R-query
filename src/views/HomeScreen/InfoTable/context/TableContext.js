@@ -1,8 +1,12 @@
 import React, { useMemo } from "react";
 import { createContext, useContext, useState, useEffect } from "react";
 import { get } from "../../../../services/apiCalls";
-import { post,removeUser } from "../../../../services/apiCalls/apiCalls";
-import { useUSerData } from "../../../../services/apiCalls/apiCalls";
+import { post, removeUser } from "../../../../services/apiCalls/apiCalls";
+import {
+  useUSerData,
+  useDeleteUSer,
+  useAddUser,
+} from "../../../../services/apiCalls/apiCalls";
 
 export const TableContext = createContext({
   currentPage: 0,
@@ -21,46 +25,42 @@ export const useTableContext = () => useContext(TableContext);
 const TableContextDataHandler = (props) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [loading, setLoading] = useState(true);
+ const[e,setE]=useState(false)
   const [rows, setrows] = useState([]);
   const [open, setOpen] = useState(false);
   const [newTableData, setNewTableData] = useState({
-    id:"",
-    firstname:"",
+    id: "",
+    firstname: "",
     lastname: "",
     phone: "",
     group: " ",
     status: "",
   });
-
-  const onSuccess = data => {
-  
-    
+  //fetch user data with usequery
+  const onSuccess = (data) => {
     setCurrentTableData(data.data);
     setrows(data.data);
-    setLoading(false)
-  }
-  const onError = error => {
-    console.log({ error })
-  }
-  
+  };
+  const onError = (error) => {
+    console.log(isError)
+    console.log(error)
+  };
+
   const { isLoading, data, isError, error, refetch } = useUSerData(
     onSuccess,
-    onError
-  )
+     onError
+  );
+  //
+  const { mutate: deleteUser } = useDeleteUSer();
+  const { mutate: addUser } = useAddUser();
 
-  const postTableData =(newTableData)=>{
-    console.log(newTableData);
-    post(newTableData).then((res)=>{
-     
-    })
-  }
-  const handleDelete =(id)=>{
-    console.log(id);
-    removeUser(id).then((res)=>{
-      
-    })
-  }
+  const postTableData = (newTableData) => {
+    addUser(newTableData);
+  };
+  const handleDelete = (id) => {
+    deleteUser(id);
+    console.log(data.data);
+  };
   const [currentTableData, setCurrentTableData] = useState([]);
   const handleChangePage = (e, newPage) => {
     setCurrentPage(newPage);
@@ -85,18 +85,17 @@ const TableContextDataHandler = (props) => {
       )
     );
   };
-  const handleFilter=(e)=>{
+  const handleFilter = (e) => {
     setCurrentTableData(
-      rows.filter((row)=>{
-        if(e.target.value=="All"){
-          return row
-        }
-        else{
-          return row.group==e.target.value
+      rows.filter((row) => {
+        if (e.target.value == "All") {
+          return row;
+        } else {
+          return row.group == e.target.value;
         }
       })
-    )
-  }
+    );
+  };
   const modalOpen = () => {
     setOpen(true);
     console.log(open);
@@ -108,7 +107,7 @@ const TableContextDataHandler = (props) => {
       rowsPerPage,
       currentTableData,
       currentTables,
-      loading,
+     
       open,
       newTableData,
       handleDelete,
@@ -116,15 +115,28 @@ const TableContextDataHandler = (props) => {
       setNewTableData,
       modalOpen,
       setOpen,
-      
+      isLoading,
+      isError,
+      Error,
       handleChangePage,
       handleChangeRow,
       handleSearch,
       setCurrentPage,
       setRowsPerPage,
-      handleFilter
+      handleFilter,
+      error
+      
     }),
-    [currentPage, rowsPerPage, currentTableData, currentTables, open,newTableData]
+    [
+      currentPage,
+      rowsPerPage,
+      currentTableData,
+      currentTables,
+      open,
+      newTableData,
+      isLoading,
+      isError,
+    ]
   );
   return <TableContext.Provider value={contextPayload} {...props} />;
 };

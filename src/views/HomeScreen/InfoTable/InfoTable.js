@@ -26,8 +26,8 @@ import {
 } from "../../../common/styledComponents/styledComponent";
 import { AddModal } from "../../../Components";
 import { LoaderComponent } from "../../../Components";
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const InfoTable = () => {
   const {
@@ -36,8 +36,6 @@ const InfoTable = () => {
     rowsPerPage,
     currentTableData,
     currentTables,
-    fetchTableData,
-    loading,
     handleChangePage,
     handleChangeRow,
     handleSearch,
@@ -47,17 +45,24 @@ const InfoTable = () => {
     setNewTableData,
     newTableData,
     postTableData,
-    handleFilter,
-    handleDelete
-
+    handleDelete,
+    isLoading,
+    isError,
+    error
   } = useTableContext();
-  useEffect(() => {
-    
-  }, []);
-
+ 
+if(isError){
+  return(
+    <>
+    <h1>{error.message} </h1>
+    </>
+  
+  )
+}
+ 
   return (
     <>
-      {!loading ? (
+      {!isLoading ? (
         <>
           <Box
             sx={{ paddingX: "20px", paddingY: "5px", background: "#f0eeeb" }}
@@ -88,9 +93,17 @@ const InfoTable = () => {
               >
                 Add New
               </Button>
-              <AddModal open={open} setOpen={setOpen} setNewTableData={setNewTableData} newTableData={newTableData} postTableData={postTableData} />
+              <AddModal
+                open={open}
+                setOpen={setOpen}
+                setNewTableData={setNewTableData}
+                newTableData={newTableData}
+                postTableData={postTableData}
+              />
             </Box>
-            <Card sx={{maxHeight:"80vh",overflowY:"scroll",overflowX:"auto"}}>
+            <Card
+              sx={{ maxHeight: "80vh", overflowY: "scroll", overflowX: "auto" }}
+            >
               <Box
                 sx={{
                   paddingY: "15px",
@@ -104,20 +117,18 @@ const InfoTable = () => {
                   size="small"
                   sx={{ width: "25%" }}
                 ></TextField>
-
               </Box>
               <TableContainer>
                 <Table sx={{ background: "white" }}>
                   <TableHead sx={{ background: "#f0eeeb" }}>
                     <TableRow>
-                      <CustomTableHeadCell sx={{ width: 400 }}>
+                      <CustomTableHeadCell sx={{ width: 200 }}>
                         Name
                       </CustomTableHeadCell>
                       <CustomTableHeadCell>Username</CustomTableHeadCell>
                       <CustomTableHeadCell>Email</CustomTableHeadCell>
                       <CustomTableHeadCell>Comapany</CustomTableHeadCell>
                       <CustomTableHeadCell></CustomTableHeadCell>
-                      
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -134,7 +145,6 @@ const InfoTable = () => {
                             }}
                           >
                             {row.name[0]}
-                            
                           </Avatar>
                           <Typography
                             sx={{ marginTop: "5px", fontSize: "12px" }}
@@ -146,9 +156,17 @@ const InfoTable = () => {
                         <CustomTableCell>{row.username}</CustomTableCell>
                         <CustomTableCell>{row.email}</CustomTableCell>
                         <CustomTableCell>{row.company.name}</CustomTableCell>
-                       
-                        <CustomTableCell><Button sx={{color:"black"}}><EditIcon/></Button>
-                        <Button sx={{color:"black"}} onClick={(e)=>handleDelete(row.id)}><DeleteIcon/></Button>
+
+                        <CustomTableCell>
+                          <Button sx={{ color: "black" }}>
+                            <EditIcon />
+                          </Button>
+                          <Button
+                            sx={{ color: "black" }}
+                            onClick={(e) => handleDelete(row.id)}
+                          >
+                            <DeleteIcon />
+                          </Button>
                         </CustomTableCell>
                       </TableRow>
                     ))}
@@ -163,7 +181,7 @@ const InfoTable = () => {
                     showLastButton
                     rowsPerPage={rowsPerPage}
                     onRowsPerPageChange={handleChangeRow}
-                    sx={{width:"250%"}}
+                    sx={{ width: "250%" }}
                   />
                 </Table>
               </TableContainer>
@@ -171,7 +189,7 @@ const InfoTable = () => {
           </Box>
         </>
       ) : (
-        <LoaderComponent/>
+        <LoaderComponent />
       )}
     </>
   );

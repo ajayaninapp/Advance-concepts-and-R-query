@@ -1,5 +1,5 @@
 import * as axios from "axios";
-import { useQuery ,useMutation} from "react-query";
+import { useQuery ,useMutation,useQueryClient} from "react-query";
 import { apiEndpoints } from "../../common";
 import apiEndPoints from "../../common/apiEndPoints";
 
@@ -16,22 +16,28 @@ export const useUSerData=(onSuccess,onError)=>{
   onError
   })
 }
-
-export const useDeleteUSer=(id)=>{  
-  return useMu(removeUser(id),{
-   
-   })
+//react query custom hook for data deletion
+export const useDeleteUSer=()=>{  
+  const queryclient= useQueryClient()
+  return useMutation(removeUser,{
+    onSuccess:()=>{
+      queryclient.invalidateQueries('user-info')
+      
+    }
+  })
+ }
+ export const useAddUser=()=>{
+  return useMutation(post)
  }
 
 export const post = (data) => {
-  console.log(data);
-  debugger;
-  return axios.post(apiEndpoints.table, data).then((response) => {
-    console.log(response.data);
-  });
+  console.log(data)
+  //return axios.post(apiEndpoints.table, data)
 };
 export const removeUser = (id) => {
+  console.log("deleting")
   debugger;
+
   return axios
     .delete(`${apiEndPoints.table}/${id}`)
     
