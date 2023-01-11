@@ -25,8 +25,6 @@ export const useTableContext = () => useContext(TableContext);
 const TableContextDataHandler = (props) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
- const[e,setE]=useState(false)
-  const [rows, setrows] = useState([]);
   const [open, setOpen] = useState(false);
   const [newTableData, setNewTableData] = useState({
     id: "",
@@ -39,7 +37,6 @@ const TableContextDataHandler = (props) => {
   //fetch user data with usequery
   const onSuccess = (data) => {
     setCurrentTableData(data.data);
-    setrows(data.data);
   };
   const onError = (error) => {
     console.log(isError)
@@ -78,7 +75,7 @@ const TableContextDataHandler = (props) => {
 
   const handleSearch = (e) => {
     setCurrentTableData(
-      rows.filter((obj) =>
+      data.data.filter((obj) =>
         Object.values(obj).some((val) =>
           String(val).toUpperCase().includes(e.target.value.toUpperCase())
         )
@@ -87,7 +84,7 @@ const TableContextDataHandler = (props) => {
   };
   const handleFilter = (e) => {
     setCurrentTableData(
-      rows.filter((row) => {
+      data.data.filter((row) => {
         if (e.target.value == "All") {
           return row;
         } else {
