@@ -53,6 +53,7 @@ const TableContextDataHandler = (props) => {
 
   const postTableData = (newTableData) => {
     addUser(newTableData);
+    setOpen(false);
   };
   const handleDelete = (id) => {
     deleteUser(id);

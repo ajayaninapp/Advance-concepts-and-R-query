@@ -31,7 +31,6 @@ const AddModal = (props) => {
   const handleNewTableData = (event) => {
     let name = event.target.name;
     let value = event.target.value;
-    console.log(value)
     setNewTableData({ ...newTableData, [name]: value });
     
   };
@@ -55,52 +54,39 @@ const AddModal = (props) => {
           <Card>
             <TextField
               sx={{ margin: "12px" }}
-              label="First Name"
+              label="Name"
               size="small"
               onChange={(e) => handleNewTableData(e)}
-              name="firstname"
+              name="name"
               
               
             />
             <TextField
               sx={{ margin: "12px" }}
-              label="Last Name"
+              label="Username"
               size="small"
               onChange={(e) => handleNewTableData(e)}
-              name="lastname"
+              name="username"
               
             />
             <TextField
               sx={{ margin: "12px" }}
-              label="Phone Number"
+              label="Email"
               size="small"
               onChange={(e) => handleNewTableData(e)}
-              name="phone"
+              name="email"
               
             />
-            <Select
-              defaultValue={"SuperAdmin"}
+             <TextField
               sx={{ margin: "12px" }}
+              label="Company"
               size="small"
               onChange={(e) => handleNewTableData(e)}
-              name="group"
+              name="Company"
               
-            >
-              <MenuItem value={"All"}>All Customers</MenuItem>
-              <MenuItem value={"SuperAdmin"}>Super Admin</MenuItem>
-              <MenuItem value={"Customer Admin"}>Customer Admin</MenuItem>
-            </Select>
-            <Select
-              defaultValue={"true"}
-              sx={{ margin: "12px" }}
-              size="small"
-              onChange={(e) => handleNewTableData(e)}
-              name="status"
-              
-            >
-              <MenuItem value={"true"}>Active</MenuItem>
-              <MenuItem value={"false"}> Disabled</MenuItem>
-            </Select>
+            />
+            
+            
           </Card>
         </DialogContent>
         <DialogActions>

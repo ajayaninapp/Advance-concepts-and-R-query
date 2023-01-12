@@ -27,12 +27,18 @@ export const useDeleteUSer=()=>{
   })
  }
  export const useAddUser=()=>{
-  return useMutation(post)
+  const queryclient= useQueryClient()
+  return useMutation(post,{
+    onSuccess:()=>{
+      queryclient.invalidateQueries('user-info')
+      
+    }
+  })
  }
 
 export const post = (data) => {
   console.log(data)
-  //return axios.post(apiEndpoints.table, data)
+  return axios.post(apiEndpoints.table, data)
 };
 export const removeUser = (id) => {
   console.log("deleting")

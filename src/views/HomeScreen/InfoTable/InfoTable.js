@@ -28,6 +28,9 @@ import { AddModal } from "../../../Components";
 import { LoaderComponent } from "../../../Components";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+function isObject(objValue) {
+  return objValue && typeof objValue === 'object' && objValue.constructor === Object;
+}
 
 const InfoTable = () => {
   const {
@@ -129,6 +132,7 @@ if(isError){
                       <CustomTableHeadCell>Email</CustomTableHeadCell>
                       <CustomTableHeadCell>Comapany</CustomTableHeadCell>
                       <CustomTableHeadCell></CustomTableHeadCell>
+                      <CustomTableHeadCell></CustomTableHeadCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -141,13 +145,13 @@ if(isError){
                               marginX: "16px",
                               fontSize: "14px",
                               width: 34,
-                              height: 34,
+                              height: 38,
                             }}
                           >
                             {row.name[0]}
                           </Avatar>
                           <Typography
-                            sx={{ marginTop: "5px", fontSize: "12px" }}
+                            sx={{ marginTop: "10px", fontSize: "12px" }}
                           >
                             {`${row.name} `}
                           </Typography>
@@ -155,13 +159,16 @@ if(isError){
 
                         <CustomTableCell>{row.username}</CustomTableCell>
                         <CustomTableCell>{row.email}</CustomTableCell>
-                        <CustomTableCell>{row.company.name}</CustomTableCell>
+                        <CustomTableCell>{(isObject(row.company))?row.company.name:row.Company}</CustomTableCell>
 
                         <CustomTableCell>
                           <Button sx={{ color: "black" }}>
                             <EditIcon />
                           </Button>
-                          <Button
+                         
+                        </CustomTableCell>
+                        <CustomTableCell>
+                        <Button
                             sx={{ color: "black" }}
                             onClick={(e) => handleDelete(row.id)}
                           >
