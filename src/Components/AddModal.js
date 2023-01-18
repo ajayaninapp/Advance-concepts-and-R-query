@@ -1,8 +1,5 @@
 import React from "react";
-import { useState } from "react";
 import {
-  MenuItem,
-  Box,
   Dialog,
   DialogContent,
   DialogTitle,
@@ -12,29 +9,39 @@ import {
   Card,
   Select,
 } from "@mui/material";
-
+import { useFormik } from "formik";
+import * as yup from "yup";
 const AddModal = (props) => {
-  const [newTableData1, setNewTableData1] = useState({
-    id:"",
-    firstname:"",
-    lastname: "",
-    phone: "",
-    group: " ",
-    status: "",
-  });
-  const { open, setOpen, newTableData, setNewTableData,postTableData } = props;
+  const { open, setOpen, newTableData, setNewTableData, postTableData } = props;
 
+  const validationSchema = yup.object({
+    email: yup
+      .string("Enter your email")
+      .email("Enter a valid email")
+      .required("Email is required"),
+    name: yup.string("enter your name").required("Name is required"),
+    company: yup.string().required("Company is required"),
+    username: yup.string().required("username is required"),
+  });
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      username: "",
+      email: "",
+      company: "",
+    },
+    validationSchema,
+    onSubmit: (values, resetForm) => {
+      alert(JSON.stringify(values));
+      postTableData(values);
+      formik.resetForm({ values: "" });
+    },
+  });
   const handleClose = () => {
     setOpen(false);
-    console.log(open);
+    formik.resetForm();
   };
-  const handleNewTableData = (event) => {
-    let name = event.target.name;
-    let value = event.target.value;
-    setNewTableData({ ...newTableData, [name]: value });
-    
-  };
-  console.log(newTableData);
+
   return (
     <div>
       <Dialog
@@ -56,42 +63,51 @@ const AddModal = (props) => {
               sx={{ margin: "12px" }}
               label="Name"
               size="small"
-              onChange={(e) => handleNewTableData(e)}
+              value={formik.values.name}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.name && Boolean(formik.errors.name)}
+              helperText={formik.touched.name && formik.errors.name}
               name="name"
-              
-              
             />
             <TextField
               sx={{ margin: "12px" }}
               label="Username"
               size="small"
-              onChange={(e) => handleNewTableData(e)}
+              value={formik.values.username}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.username && Boolean(formik.errors.username)}
+              helperText={formik.touched.username && formik.errors.username}
               name="username"
-              
             />
             <TextField
               sx={{ margin: "12px" }}
               label="Email"
               size="small"
-              onChange={(e) => handleNewTableData(e)}
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
               name="email"
-              
             />
-             <TextField
+            <TextField
               sx={{ margin: "12px" }}
               label="Company"
+              value={formik.values.company}
               size="small"
-              onChange={(e) => handleNewTableData(e)}
-              name="Company"
-              
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.company && Boolean(formik.errors.company)}
+              helperText={formik.touched.company && formik.errors.company}
+              name="company"
             />
-            
-            
           </Card>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={(e) => postTableData(newTableData)}>Add User</Button>
+          <Button onClick={formik.handleSubmit}>Add User</Button>
         </DialogActions>
       </Dialog>
     </div>

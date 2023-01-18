@@ -159,7 +159,7 @@ if(isError){
 
                         <CustomTableCell>{row.username}</CustomTableCell>
                         <CustomTableCell>{row.email}</CustomTableCell>
-                        <CustomTableCell>{(isObject(row.company))?row.company.name:row.Company}</CustomTableCell>
+                        <CustomTableCell>{(isObject(row.company))?row.company.name:row.company}</CustomTableCell>
 
                         <CustomTableCell>
                           <Button sx={{ color: "black" }}>
