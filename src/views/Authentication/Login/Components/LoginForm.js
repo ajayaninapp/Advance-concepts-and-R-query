@@ -6,7 +6,7 @@ const LoginForm = () => {
   return (
     <Box
       sx={{
-        height: "90vh",
+        height: "88vh",
         width: "100%",
         background: "#FCFCFC",
         display: "flex",
@@ -16,7 +16,7 @@ const LoginForm = () => {
       align="center"
     >
       <Box>
-        <Typography sx={{ fontSize: "45px", fontWeight: "550" }}>
+        <Typography sx={{ fontSize: "35px", fontWeight: "550" }}>
           Login To Your Account
         </Typography>
         <Grid

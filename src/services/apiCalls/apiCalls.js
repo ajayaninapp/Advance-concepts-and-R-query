@@ -6,7 +6,6 @@ import apiEndPoints from "../../common/apiEndPoints";
 
 //Table Data Api call
 export const get = () => {
-  debugger;
   return axios.get(apiEndpoints.table);
 };
 //react query custom hook for data fetching
@@ -37,12 +36,9 @@ export const useDeleteUSer=()=>{
  }
 
 export const post = (data) => {
-  console.log(data)
   return axios.post(apiEndpoints.table, data)
 };
 export const removeUser = (id) => {
-  console.log("deleting")
-  debugger;
 
   return axios
     .delete(`${apiEndPoints.table}/${id}`)

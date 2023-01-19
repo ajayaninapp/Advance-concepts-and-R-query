@@ -9,7 +9,8 @@ import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 const Header = () => {
   return (
    
-        
+        <AppBar sx={{background:'#333'}}>
+          
           <Toolbar  position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
           <Box sx={{flexGrow:1}} >
           <IconButton           
@@ -33,6 +34,7 @@ const Header = () => {
           
 
           </Toolbar>
+        </AppBar>
   
 
 

@@ -7,7 +7,6 @@ import {
   DialogActions,
   TextField,
   Card,
-  Select,
 } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -32,9 +31,8 @@ const AddModal = (props) => {
     },
     validationSchema,
     onSubmit: (values, resetForm) => {
-      alert(JSON.stringify(values));
       postTableData(values);
-      formik.resetForm({ values: "" });
+      resetForm({ values: "" });
     },
   });
   const handleClose = () => {

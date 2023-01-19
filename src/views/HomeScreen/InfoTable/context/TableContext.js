@@ -39,8 +39,6 @@ const TableContextDataHandler = (props) => {
     setCurrentTableData(data.data);
   };
   const onError = (error) => {
-    console.log(isError)
-    console.log(error)
   };
 
   const { isLoading, data, isError, error, refetch } = useUSerData(
@@ -57,7 +55,6 @@ const TableContextDataHandler = (props) => {
   };
   const handleDelete = (id) => {
     deleteUser(id);
-    console.log(data.data);
   };
   const [currentTableData, setCurrentTableData] = useState([]);
   const handleChangePage = (e, newPage) => {
@@ -70,7 +67,6 @@ const TableContextDataHandler = (props) => {
   const currentTables = useMemo(() => {
     const firstPageIndex = currentPage * rowsPerPage;
     const lastPageIndex = firstPageIndex + rowsPerPage;
-    debugger;
     return currentTableData.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, rowsPerPage, currentTableData]);
 
@@ -96,7 +92,6 @@ const TableContextDataHandler = (props) => {
   };
   const modalOpen = () => {
     setOpen(true);
-    console.log(open);
   };
 
   const contextPayload = useMemo(
