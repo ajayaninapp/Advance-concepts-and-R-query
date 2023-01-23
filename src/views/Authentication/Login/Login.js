@@ -1,6 +1,7 @@
 import React from 'react'
 import { Grid, Box } from "@mui/material";
 import LoginForm from './Components/LoginForm';
+import SignUpPrompt from './Components/SignUpPrompt';
 
 
 const Login = () => {
@@ -8,7 +9,7 @@ const Login = () => {
     <>
     <Grid container sx={{  }}>
       <Grid item sm={5} xs={12}>
-        <div className="background"></div>
+        <SignUpPrompt/>
       </Grid>
       <Grid item sm={7} xs={12}>
           <LoginForm/>

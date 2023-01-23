@@ -4,11 +4,12 @@ import "./App.css";
 import { HomeScreen } from "./views/HomeScreen";
 import { QueryClientProvider,QueryClient } from "react-query";
 import AuthLayout from "./Layouts/AuthLayout/AuthLayout";
+import RouterContainer from "./Routes/RouterContainer";
 const queryclient=new QueryClient()
 function App() {
   return (
       <QueryClientProvider client={queryclient}>
-       <AuthLayout/>
+      <RouterContainer/>
    
     </QueryClientProvider>
     

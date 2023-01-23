@@ -6,7 +6,7 @@ const LoginForm = () => {
   return (
     <Box
       sx={{
-        height: "88vh",
+        height: "92vh",
         width: "100%",
         background: "#FCFCFC",
         display: "flex",
