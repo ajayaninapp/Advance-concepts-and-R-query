@@ -14,25 +14,9 @@ import TableContextDataHandler from "./InfoTable/context/TableContext";
 
 const HomePage = () => {
   return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, background: "#333" }}
-      >
-        
-        <Header />
-        
-      </AppBar>
-      <SideDrawer/>
-
-      <Box component="main" sx={{ flexGrow: 1, background:"#f0eeeb",minHeight:"100vh" ,maxWidth:"calc(100vw-240px)",overflowX:"hidden"}}>
-        <Toolbar />
-        <TableContextDataHandler>
-        <InfoTable />
-        </TableContextDataHandler>
-      </Box>
-    </Box>
+    <TableContextDataHandler>
+    <InfoTable />
+    </TableContextDataHandler>
   );
 };
 export default HomePage;

@@ -28,6 +28,7 @@ import { AddModal } from "../../../Components";
 import { LoaderComponent } from "../../../Components";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import TableContextDataHandler from "./context/TableContext";
 function isObject(objValue) {
   return objValue && typeof objValue === 'object' && objValue.constructor === Object;
 }
@@ -64,7 +65,7 @@ if(isError){
 }
  
   return (
-    <>
+    <TableContextDataHandler>
       {!isLoading ? (
         <>
           <Box
@@ -198,7 +199,7 @@ if(isError){
       ) : (
         <LoaderComponent />
       )}
-    </>
+    </TableContextDataHandler>
   );
 };
 

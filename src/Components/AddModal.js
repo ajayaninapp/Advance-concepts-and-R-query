@@ -10,18 +10,11 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { formValidationSchema } from "../common/FormValidation";
 const AddModal = (props) => {
   const { open, setOpen, newTableData, setNewTableData, postTableData } = props;
 
-  const validationSchema = yup.object({
-    email: yup
-      .string("Enter your email")
-      .email("Enter a valid email")
-      .required("Email is required"),
-    name: yup.string("enter your name").required("Name is required"),
-    company: yup.string().required("Company is required"),
-    username: yup.string().required("username is required"),
-  });
+  const validationSchema = formValidationSchema;
   const formik = useFormik({
     initialValues: {
       name: "",

@@ -4,6 +4,9 @@ import RouteWithLayout from '../Components/RouteWithLyout/RouteWithLayout';
 import { routes } from './Routes';
 import Login from '../views/Authentication/Login/Login';
 import AuthLayout from '../Layouts/AuthLayout/AuthLayout';
+import Signup from '../views/Authentication/Signup/Signup';
+import MainLayout from '../Layouts/MainLayout/MainLayout';
+import { HomeScreen } from '../views/HomeScreen';
 
 const RouterContainer = () => {
   const isLoggedIn=false;
@@ -14,17 +17,17 @@ const RouterContainer = () => {
          <Routes>
         {isLoggedIn ? (
           <>
-         <Route exact path={routes.signin} element={<AuthLayout><Login/></AuthLayout>} />
+         <Route exact path={routes.signin} element={<MainLayout><HomeScreen/></MainLayout>} />
           
         </>
           
         ) : (
           
           <>
-            <Route exact path={routes.signin} element={<AuthLayout><Login/></AuthLayout>} />
+            <Route exact path={routes.signin} element={<MainLayout><HomeScreen/></MainLayout>} />
         </>
         )}
-         <Route exact path={routes.landing} element={<AuthLayout><Login/></AuthLayout>} />
+         <Route exact path={routes.landing} element={<MainLayout><HomeScreen/></MainLayout>} />
         
       </Routes>
     </BrowserRouter>

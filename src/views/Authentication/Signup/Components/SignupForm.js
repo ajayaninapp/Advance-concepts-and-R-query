@@ -1,9 +1,14 @@
 import React from "react";
-import { Box,Typography,Grid } from "@mui/material";
-import { CustomButton,FormEmail } from "../../../../common/styledComponents/styledComponent";
+import { Box, Typography, Grid,Button } from "@mui/material";
+import {
+  CustomButton,
+  FormEmail,
+} from "../../../../common/styledComponents/styledComponent";
 import { useFormik } from "formik";
+import * as yup from "yup";
 import { authValidationSchema } from "../../../../common/FormValidation";
-const LoginForm = () => {
+
+const SignupForm = () => {
   const validationSchema=authValidationSchema;
   const formik = useFormik({
     initialValues: {
@@ -12,11 +17,11 @@ const LoginForm = () => {
     },
     validationSchema,
     onSubmit: (values, resetForm) => {
-      
       console.log(values);
       resetForm({ values: "" });
     },
   });
+
   return (
     <Box
       sx={{
@@ -31,7 +36,7 @@ const LoginForm = () => {
     >
       <Box>
         <Typography sx={{ fontSize: "35px", fontWeight: "550" }}>
-          Login To Your Account
+          Register Your Account
         </Typography>
         <Grid
           container
@@ -40,7 +45,7 @@ const LoginForm = () => {
           sx={{ marginTop: 10 }}
         >
           <Grid item xl={8} lg={10} md={10} sm={11} xs={11}>
-          <FormEmail
+            <FormEmail
               className="inputRounded"
               fullWidth
               value={formik.values.email}
@@ -66,12 +71,12 @@ const LoginForm = () => {
             />
           </Grid>
           <Grid item xl={6} lg={6} md={6} sm={8} xs={8}>
-            <CustomButton fullWidth  onClick={formik.handleSubmit}>Log In</CustomButton>
+            <CustomButton  onClick={formik.handleSubmit} fullWidth>Signup</CustomButton>
           </Grid>
         </Grid>
       </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default LoginForm
+export default SignupForm;

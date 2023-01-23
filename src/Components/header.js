@@ -11,7 +11,7 @@ const Header = () => {
    
         <AppBar sx={{background:'#333'}}>
           
-          <Toolbar  position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 ,height:'120px'}}>
+          <Toolbar  position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
           <Box sx={{flexGrow:1}} >
           <IconButton           
           
