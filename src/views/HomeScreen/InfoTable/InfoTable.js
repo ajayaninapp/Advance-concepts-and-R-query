@@ -28,7 +28,6 @@ import { AddModal } from "../../../Components";
 import { LoaderComponent } from "../../../Components";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import TableContextDataHandler from "./context/TableContext";
 function isObject(objValue) {
   return objValue && typeof objValue === 'object' && objValue.constructor === Object;
 }
@@ -65,7 +64,7 @@ if(isError){
 }
  
   return (
-    <TableContextDataHandler>
+    <>
       {!isLoading ? (
         <>
           <Box
@@ -139,8 +138,9 @@ if(isError){
                   <TableBody>
                     {currentTables?.map((row) => (
                       <TableRow>
-                        <CustomTableCell sx={{ display: "flex" }}>
-                          <Avatar
+                        <CustomTableCell sx={{ }}>
+                         <Box sx={{display:"flex",alignItems:"center",height:"100%"}}> 
+                         <Avatar
                             variant="small"
                             sx={{
                               marginX: "16px",
@@ -152,10 +152,11 @@ if(isError){
                             {row.name[0]}
                           </Avatar>
                           <Typography
-                            sx={{ marginTop: "10px", fontSize: "12px" }}
+                            sx={{  fontSize: "12px" }}
                           >
                             {`${row.name} `}
                           </Typography>
+                         </Box>
                         </CustomTableCell>
 
                         <CustomTableCell>{row.username}</CustomTableCell>
@@ -199,7 +200,7 @@ if(isError){
       ) : (
         <LoaderComponent />
       )}
-    </TableContextDataHandler>
+    </>
   );
 };
 
