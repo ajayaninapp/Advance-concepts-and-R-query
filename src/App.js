@@ -6,7 +6,10 @@ import { QueryClientProvider,QueryClient } from "react-query";
 import AuthLayout from "./Layouts/AuthLayout/AuthLayout";
 import RouterContainer from "./Routes/RouterContainer";
 import MainLayout from "./Layouts/MainLayout/MainLayout";
+import { Amplify, Auth } from 'aws-amplify';
+import awsmobile from "./aws-exports";
 const queryclient=new QueryClient()
+Amplify.configure(awsmobile)
 function App() {
   return (
       <QueryClientProvider client={queryclient}>

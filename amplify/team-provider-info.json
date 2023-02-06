@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-truenorthlearning-dev-120012-authRole",
+      "UnauthRoleArn": "arn:aws:iam::669258736201:role/amplify-truenorthlearning-dev-120012-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::669258736201:role/amplify-truenorthlearning-dev-120012-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-truenorthlearning-dev-120012-deployment",
+      "UnauthRoleName": "amplify-truenorthlearning-dev-120012-unauthRole",
+      "StackName": "amplify-truenorthlearning-dev-120012",
+      "StackId": "arn:aws:cloudformation:us-east-1:669258736201:stack/amplify-truenorthlearning-dev-120012/b810a380-a5e7-11ed-88db-0ad6dd7a425d",
+      "AmplifyAppId": "d20rmr7xcj2t9o"
+    },
+    "categories": {
+      "auth": {
+        "truenorthlearning7c014299": {}
+      }
+    }
+  }
+}

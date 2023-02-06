@@ -1,20 +1,15 @@
 import React from "react";
-import { useEffect } from "react";
 import {
   Card,
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableRow,
-  TableFooter,
   TablePagination,
   Box,
   TextField,
   TableContainer,
   Typography,
-  Select,
-  MenuItem,
 } from "@mui/material";
 import { useTableContext } from "./context";
 import { Button } from "@mui/material";
@@ -29,13 +24,14 @@ import { LoaderComponent } from "../../../Components";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 function isObject(objValue) {
-  return objValue && typeof objValue === 'object' && objValue.constructor === Object;
+  return (
+    objValue && typeof objValue === "object" && objValue.constructor === Object
+  );
 }
 
 const InfoTable = () => {
   const {
     currentPage,
-    rows,
     rowsPerPage,
     currentTableData,
     currentTables,
@@ -51,18 +47,17 @@ const InfoTable = () => {
     handleDelete,
     isLoading,
     isError,
-    error
+    error,
   } = useTableContext();
- 
-if(isError){
-  return(
-    <>
-    <h1>{error.message} </h1>
-    </>
-  
-  )
-}
- 
+
+  if (isError) {
+    return (
+      <>
+        <h1>{error.message} </h1>
+      </>
+    );
+  }
+
   return (
     <>
       {!isLoading ? (
@@ -138,39 +133,46 @@ if(isError){
                   <TableBody>
                     {currentTables?.map((row) => (
                       <TableRow>
-                        <CustomTableCell sx={{ }}>
-                         <Box sx={{display:"flex",alignItems:"center",height:"100%"}}> 
-                         <Avatar
-                            variant="small"
+                        <CustomTableCell sx={{}}>
+                          <Box
                             sx={{
-                              marginX: "16px",
-                              fontSize: "14px",
-                              width: 34,
-                              height: 38,
+                              display: "flex",
+                              alignItems: "center",
+                              height: "100%",
                             }}
                           >
-                            {row.name[0]}
-                          </Avatar>
-                          <Typography
-                            sx={{  fontSize: "12px" }}
-                          >
-                            {`${row.name} `}
-                          </Typography>
-                         </Box>
+                            <Avatar
+                              variant="small"
+                              sx={{
+                                marginX: "16px",
+                                fontSize: "14px",
+                                width: 34,
+                                height: 38,
+                              }}
+                            >
+                              {row.name[0]}
+                            </Avatar>
+                            <Typography sx={{ fontSize: "12px" }}>
+                              {`${row.name} `}
+                            </Typography>
+                          </Box>
                         </CustomTableCell>
 
                         <CustomTableCell>{row.username}</CustomTableCell>
                         <CustomTableCell>{row.email}</CustomTableCell>
-                        <CustomTableCell>{(isObject(row.company))?row.company.name:row.company}</CustomTableCell>
+                        <CustomTableCell>
+                          {isObject(row.company)
+                            ? row.company.name
+                            : row.company}
+                        </CustomTableCell>
 
                         <CustomTableCell>
                           <Button sx={{ color: "black" }}>
                             <EditIcon />
                           </Button>
-                         
                         </CustomTableCell>
                         <CustomTableCell>
-                        <Button
+                          <Button
                             sx={{ color: "black" }}
                             onClick={(e) => handleDelete(row.id)}
                           >

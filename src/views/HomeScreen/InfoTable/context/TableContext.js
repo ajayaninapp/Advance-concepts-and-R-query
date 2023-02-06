@@ -1,7 +1,5 @@
 import React, { useMemo } from "react";
-import { createContext, useContext, useState, useEffect } from "react";
-import { get } from "../../../../services/apiCalls";
-import { post, removeUser } from "../../../../services/apiCalls/apiCalls";
+import { createContext, useContext, useState } from "react";
 import {
   useUSerData,
   useDeleteUSer,

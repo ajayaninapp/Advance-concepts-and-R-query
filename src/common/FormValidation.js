@@ -18,7 +18,6 @@ export const formValidationSchema = yup.object({
 export const authValidationSchema = yup.object({
   email: yup
     .string("Enter your email")
-    .email("Enter a valid email")
     .required("Email is required"),
   password: yup
     .string()

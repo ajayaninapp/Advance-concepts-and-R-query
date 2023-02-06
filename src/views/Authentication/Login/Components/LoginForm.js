@@ -3,8 +3,17 @@ import { Box,Typography,Grid } from "@mui/material";
 import { CustomButton,FormEmail } from "../../../../common/styledComponents/styledComponent";
 import { useFormik } from "formik";
 import { authValidationSchema } from "../../../../common/FormValidation";
+import {  Auth } from 'aws-amplify';
 const LoginForm = () => {
   const validationSchema=authValidationSchema;
+  async function signIn(email, password) {
+    try {
+        const user = await Auth.signIn(email, password);
+        console.log("sucess");
+    } catch (error) {
+        console.log('error signing in', error);
+    }
+}
   const formik = useFormik({
     initialValues: {
       email:""
@@ -13,10 +22,12 @@ const LoginForm = () => {
     validationSchema,
     onSubmit: (values, resetForm) => {
       
-      console.log(values);
-      resetForm({ values: "" });
+
+
+      signIn(values.email,values.password)
     },
   });
+
   return (
     <Box
       sx={{
