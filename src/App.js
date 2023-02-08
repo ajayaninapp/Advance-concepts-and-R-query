@@ -8,13 +8,17 @@ import RouterContainer from "./Routes/RouterContainer";
 import MainLayout from "./Layouts/MainLayout/MainLayout";
 import { Amplify, Auth } from 'aws-amplify';
 import awsmobile from "./aws-exports";
+import AuthDatahandler from "./views/AuthDataHandler/AuthDatahandler";
 const queryclient=new QueryClient()
 Amplify.configure(awsmobile)
 function App() {
   return (
-      <QueryClientProvider client={queryclient}>
+    <AuthDatahandler>
+     <QueryClientProvider client={queryclient}>
      <RouterContainer/>
     </QueryClientProvider>
+    </AuthDatahandler>
+      
     
       
     

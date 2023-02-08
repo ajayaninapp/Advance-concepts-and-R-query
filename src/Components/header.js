@@ -13,8 +13,13 @@ import z5Logo from "../Assets/images/z5logo.png";
 import TranslateIcon from "@mui/icons-material/Translate";
 import SettingsIcon from "@mui/icons-material/Settings";
 import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
-
+import { Auth } from "aws-amplify";
+import { useAuthDataContext } from "../views/AuthDataHandler/AuthDatahandler";
 const Header = () => {
+  const {signOut}=useAuthDataContext();
+  const handleSignout=()=>{
+    signOut();
+  }
   return (
     <AppBar sx={{ background: "#333" }}>
       <Toolbar
@@ -38,7 +43,7 @@ const Header = () => {
         <TranslateIcon />
         <Typography sx={{ marginX: 2 }}>English(en-US)</Typography>
         <NotificationsActiveIcon sx={{ marginX: 2 }} />
-        <SettingsIcon sx={{ marginX: 2 }} />
+        <IconButton onClick={handleSignout}><SettingsIcon sx={{ marginX: 2 ,color:"white"}} /></IconButton>
       </Toolbar>
     </AppBar>
   );

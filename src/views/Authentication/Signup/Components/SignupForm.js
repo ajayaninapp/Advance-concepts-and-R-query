@@ -7,6 +7,7 @@ import {
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { authValidationSchema } from "../../../../common/FormValidation";
+import {Auth } from 'aws-amplify';
 
 const SignupForm = () => {
   const validationSchema=authValidationSchema;
