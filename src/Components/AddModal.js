@@ -11,8 +11,10 @@ import {
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { formValidationSchema } from "../common/FormValidation";
+import { useTableContext } from "../views/HomeScreen/InfoTable/context";
 const AddModal = (props) => {
-  const { open, setOpen, newTableData, setNewTableData, postTableData } = props;
+  const { open, setOpen, newTableData, setNewTableData } = props;
+  const{postTableData}=useTableContext();
 
   const validationSchema = formValidationSchema;
   const formik = useFormik({
@@ -24,6 +26,7 @@ const AddModal = (props) => {
     },
     validationSchema,
     onSubmit: (values, resetForm) => {
+      console.log
       postTableData(values);
       resetForm({ values: "" });
     },

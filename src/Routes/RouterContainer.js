@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLoaderData } from "react-router-dom";
 import RouteWithLayout from '../Components/RouteWithLyout/RouteWithLayout';
 import { routes } from './Routes';
 import Login from '../views/Authentication/Login/Login';
@@ -8,19 +8,25 @@ import Signup from '../views/Authentication/Signup/Signup';
 import MainLayout from '../Layouts/MainLayout/MainLayout';
 import { HomeScreen } from '../views/HomeScreen';
 import { useAuthDataContext } from '../views/AuthDataHandler/AuthDatahandler'
+import { useLoadingContext } from '../Components/Loaders/LoadingHandler';
 const RouterContainer = () => {
   const {userAuthData,isLoggedin}=useAuthDataContext();
   const rootUrl = (isLoggedin ?(routes.home):(routes.landing))
+  const {mainLoaderOpen}=useLoadingContext();
   
-  console.log(isLoggedin)
+  console.log(mainLoaderOpen)
+  if (mainLoaderOpen){
+    return <div>Loading......  </div>  
+      
+  }
   return (
     <div>
          <BrowserRouter>
          <Routes>
         {isLoggedin ? (
           <>
-         <Route exact path={routes.home} element={<MainLayout><HomeScreen/></MainLayout>} />
-          <Route exact path="*" element={<MainLayout><HomeScreen/></MainLayout>}/>
+         <Route exact path={routes.home} element={<AuthLayout><HomeScreen/></AuthLayout>} />
+          <Route exact path="*" element={<AuthLayout><HomeScreen/></AuthLayout>}/>
         </>
           
         ) : (
